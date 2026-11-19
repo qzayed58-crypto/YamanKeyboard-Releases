@@ -1,0 +1,77 @@
+name: Publish Android release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - YamanKeyboard-latest.apk
+      - YamanKeyboard-version.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yaman-keyboard-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          apk="YamanKeyboard-latest.apk"
+          version_file="YamanKeyboard-version.txt"
+          test -s "$apk"
+          test -s "$version_file"
+
+          version="$(tr -d '\r\n\t ' < "$version_file")"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid release version: $version" >&2
+            exit 1
+          fi
+          tag="v$version"
+          title="YamanKeyboard $version"
+          notes="Automatically published from the YamanKeyboard Android build."
+
+          current_tag="$(gh release view --json tagName --jq .tagName 2>/dev/null || true)"
+          promote_latest=true
+          if [[ -n "$current_tag" ]]; then
+            if python3 - "$tag" "$current_tag" <<'PY'
+          import re
+          import sys
+
+          def version_tuple(tag):
+              match = re.fullmatch(r"v?(\d+)\.(\d+)\.(\d+)", tag)
+              if not match:
+                  raise SystemExit(f"Cannot compare non-semver release tag: {tag}")
+              return tuple(int(part) for part in match.groups())
+
+          raise SystemExit(0 if version_tuple(sys.argv[1]) >= version_tuple(sys.argv[2]) else 1)
+          PY
+            then
+              promote_latest=true
+            else
+              promote_latest=false
+            fi
+          fi
+
+          if gh release view "$tag" --json tagName >/dev/null 2>&1; then
+            gh release upload "$tag" "$apk" --clobber
+            if [[ "$promote_latest" == true ]]; then
+              gh release edit "$tag" --title "$title" --notes "$notes" --latest
+            else
+              gh release edit "$tag" --title "$title" --notes "$notes"
+            fi
+          elif [[ "$promote_latest" == true ]]; then
+            gh release create "$tag" "$apk" --title "$title" --notes "$notes" --latest
+          else
+            gh release create "$tag" "$apk" --title "$title" --notes "$notes" --latest=false
+          fi
