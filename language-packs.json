@@ -1,0 +1,15 @@
+{
+  "packs": {
+    "indonesian": {
+      "archive_bytes": 509711,
+      "archive_sha256": "76fba97d2505537acbd56d57db3a1faf53afc82fd1e0929de18f7b15abd8ab93",
+      "manifest_sha256": "803bd1d38eb55622185e1ad571bc19dced4d47d43932e7e4c17e5b913643111b"
+    },
+    "turkish": {
+      "archive_bytes": 1611465,
+      "archive_sha256": "5e72c9a7e8cb2ca8a3866c9e1340cf339fa4a703153c74a083b9a2dd968d1448",
+      "manifest_sha256": "21a0c704d453bdfbca553edc225801c518c8d46ec9586c99b98ae1871d7f7794"
+    }
+  },
+  "schema": 1
+}

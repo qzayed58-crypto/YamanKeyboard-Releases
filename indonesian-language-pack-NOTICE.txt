@@ -1,0 +1,12 @@
+Indonesian optional language-pack data attribution
+
+This optional pack contains 70,383 Indonesian base and headword entries and 81,031 unique suggestion entries. The lists contain only individual lexical words and attested word forms; definitions, example sentences, quotations, and source passages are not redistributed. The pack is downloaded only when the user requests Indonesian in keyboard settings.
+
+The vocabulary data is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0). Attribution: Indonesian frequency data from Wordfreq (small_id.msgpack.gz, pinned repository revision 912caf64b657478d1dff1138efdc078947d54bb1); Indonesian word and form data extracted from English Wiktionary by Wiktextract and distributed by Kaikki.org (2026-10-30 extraction of the 2026-10-01 Wiktionary dump). See the included LICENSE-CC-BY-SA-4.0.txt, manifest.json, and the source URLs below.
+
+Wordfreq: https://github.com/rspeer/wordfreq
+Wiktionary extraction: https://kaikki.org/dictionary/downloads/id/id-extract.jsonl.gz
+Wiktionary licensing and attribution: https://en.wiktionary.org/wiki/Wiktionary:Copyrights
+Wiktextract: https://github.com/tatuylonen/wiktextract
+
+Indonesian verbs do not inflect for grammatical person or tense. The list therefore does not invent person/tense paradigms; it combines frequency-ranked forms with forms attested in the extracted word data, including active/passive, imperative, reduplicated, and derived forms where available. Nonstandard, slang, dialectal, archaic, and obsolete entries are filtered where marked by the source. The project’s local whole-word exclusion rules are applied before the lists are written. No runtime morphology engine is shipped; the app reads verified flat word lists.

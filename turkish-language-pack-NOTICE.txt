@@ -1,8 +1,25 @@
-Turkish language data attribution
+Turkish optional language-pack data attribution
 
-This optional language pack contains a Turkish word-frequency vocabulary derived from the Turkish list distributed by wordfreq:
-https://github.com/rspeer/wordfreq
-Source revision: 912caf64b657478d1dff1138efdc078947d54bb1
-The source list was filtered with Turkish morphological analysis to retain attested forms associated with 10,000 frequent distinct lemmas. The resulting vocabulary is provided under the Creative Commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0). See LICENSE-CC-BY-SA-4.0.txt and https://creativecommons.org/licenses/by-sa/4.0/.
+This optional pack contains 84,657 lemma entries and 420,318 unique suggestion entries. The two word lists total 5,982,853 uncompressed bytes. They contain lexical entries only, not source passages. The words are assembled from the pinned Turkish Wordfreq list, vetted general lexical roots from TRmorph, curated country/capital/city/landmark/waterway/specialist entries, GeoNames city-name components, and offline-generated inflections. Blocklisted complete words and their specified ة/ه spelling variants are excluded by the local build filter.
 
-This notice and the accompanying license are included with the downloadable data pack. The application does not download this pack unless the user requests it.
+Morphology is precomputed offline; no Foma, TRmorph engine, runtime morphology, or new suggestion-generation algorithm is included. All accepted noun roots receive plural, core case, and third-person possessive forms; broader possessive and derivational forms are limited to smaller frequency-ranked subsets. The common affirmative and negative person forms for five tenses are generated for accepted verbs. All accepted verbs also receive ability/inability forms in the past, aorist, and future, with continuous and conditional ability plus evidential, necessitative, imperfective, and copula forms prioritized for more frequent verbs. Adjectives receive useful nominalized forms, and case suffixes are generated only for curated place-name roots rather than every GeoNames component.
+
+Wordfreq Turkish source
+Repository: https://github.com/rspeer/wordfreq
+Revision: 912caf64b657478d1dff1138efdc078947d54bb1
+Source file SHA-256: 10980704ee3ac5b52f226579251905412a04ead57092a12182dd0b8be6a765df
+License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+See LICENSE-CC-BY-SA-4.0.txt and https://creativecommons.org/licenses/by-sa/4.0/.
+
+TRmorph and Foma
+TRmorph repository: https://github.com/coltekin/TRmorph
+Pinned revision: fbceb1133fbdc51bd63693d448b7cb75672e2256
+The pinned repository LICENSE and README specify MIT; see LICENSE-TRMORPH-MIT.txt. The bundled March 2015 draft manual contains an older LGPL footnote that conflicts with those revision-level license files. The transducer is used only during offline word-list generation; no Foma or TRmorph engine is included in the application or language-pack archive.
+
+Geographic and locale data
+GeoNames cities15000 snapshot: https://download.geonames.org/export/dump/cities15000.zip
+Source SHA-256: ef92c9b4d801f1da959372f53d2f586517b704239ea0b8756045a3d804438779
+GeoNames data is used under CC BY 4.0; attribution: GeoNames (https://www.geonames.org/).
+Turkish territory-name components use Babel 2.17.0 locale data based on Unicode CLDR. See LICENSE-UNICODE-V3.txt for the Unicode data license notice. Curated spelling and fact references include the UN M49 list, UN world-capital names, NGA Geographic Names Server, Natural Earth, UNESCO World Heritage List, Google Machine Learning Glossary, and Türkiye MFA country/capital list; only lexical names and components are retained.
+
+The pack is not included in the base app and is downloaded only when the user requests the optional Turkish language. The user may remove the downloaded language pack and its local files from the app settings.
